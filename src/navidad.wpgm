@@ -1,0 +1,8 @@
+import navidad.*
+import wollok.game.*
+
+program iniciar {
+
+	navidad.llegar()
+	game.start()	
+}
