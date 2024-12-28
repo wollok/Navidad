@@ -1,4 +1,4 @@
-import navidad.*
+import navidadX.*
 import wollok.game.*
 
 program iniciar {

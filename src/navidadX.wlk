@@ -2,14 +2,15 @@ import wollok.game.*
 
 
 object navidad {
-	
+	const dimension = 11
 	const colores = ["Rojo","Verde","Amarillo"]
 	const adornos = []
 	method llegar(){
-		game.width(9)
-		game.height(9)
+		game.width(dimension)
+		game.height(dimension)
 		20.times{x=> self.agregarAdorno()}
 		
+		arbol.inicializar()
 		game.addVisualCharacter(arbol)
 		
 		game.schedule(2000,
@@ -27,12 +28,15 @@ object navidad {
 	method color() = colores.anyOne()
 	
 	
-	method posicionAleatoria() = 
-		game.at(
-			(0..game.width()-1).anyOne(),
-			(0..game.height()-1).anyOne()
-		)
-	
+	method posicionAleatoria() { 
+		const lugares = (0..dimension-1)
+		const x = lugares.anyOne()
+		const y = lugares.anyOne()
+		return if (x.between(3,dimension-2) and y.between(3,dimension-2))
+					self.posicionAleatoria()
+				else
+					game.at(x,y)
+	}
 	method moverAdornos(){
 		adornos.forEach{a=>a.mover()}
 		if(self.adornosColocados()){
@@ -45,15 +49,18 @@ object navidad {
 }
 
 object arbol {
-	var property position = game.center()
+	var property position = null
 
 	method image() = "arbol.png"
+	method inicializar(){
+		position = game.center()
+	}
 }
 
 object saludo {
-	var property position = arbol.position().up(1)
+	method position() = arbol.position().up(1)
 
-	method text() = "¡FELIZ NAVIDAD!"
+	method text() = "¡FELIZ AÑO!"
 }
 
 class Adorno {
@@ -64,8 +71,8 @@ class Adorno {
 	
 	method mover() {
 		const destino = game.at(
-			arbol.position().x() + (position.x() - arbol.position().x()).div(2),
-			arbol.position().y() + (position.y() - arbol.position().y()).div(2)
+			arbol.position().x() + (position.x() - arbol.position().x()).div(1.2),
+			arbol.position().y() + (position.y() - arbol.position().y()).div(1.2)
 		)
 		position = [destino.up(1),destino.down(1),destino,destino.right(1),destino.left(1)].anyOne()
 	}
