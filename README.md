@@ -1,8 +1,6 @@
 # ¡¡Felicidades!!
 
-[![video arbol](image.png)](https://www.youtube.com/watch?v=XfmYVl-zdOg)
+![Arbol de navidad](arbolQuieto.gif)
 
-
-### Mueve el arbol con las flechas
-
+**Mueve el arbol con las flechas**
 ![Animacion arbol escapando](arbol.gif)
