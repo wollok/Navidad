@@ -2,12 +2,13 @@ import wollok.game.*
 
 
 object navidad {
-	const dimension = 11
+	const ancho = 25
+	const alto = 11
 	const colores = ["Rojo","Verde","Amarillo"]
 	const adornos = []
 	method llegar(){
-		game.width(dimension)
-		game.height(dimension)
+		game.width(ancho)
+		game.height(alto)
 		20.times{x=> self.agregarAdorno()}
 		
 		arbol.inicializar()
@@ -29,10 +30,9 @@ object navidad {
 	
 	
 	method posicionAleatoria() { 
-		const lugares = (0..dimension-1)
-		const x = lugares.anyOne()
-		const y = lugares.anyOne()
-		return if (x.between(3,dimension-2) and y.between(3,dimension-2))
+		const x = (0..ancho-1).anyOne()
+		const y = (0..alto-1).anyOne()
+		return if (x.between(3,ancho-2) and y.between(3,alto-2))
 					self.posicionAleatoria()
 				else
 					game.at(x,y)
